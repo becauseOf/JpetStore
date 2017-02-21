@@ -1,0 +1,137 @@
+/*li {
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex;
+}*/
+
+
+/*
+table {
+    border-width: 0;
+    empty-cells: show;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+td, th {
+    empty-cells: show;
+    padding: .3ex .3ex;
+    vertical-align: top;
+    text-align: left;
+    border-width: 0;
+    border-spacing: 0;
+    background-color: #ececec
+}
+
+th {
+    font-weight: bold;
+    background-color: #e2e2e2;
+}*/
+
+table{
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+
+    empty-cells: show;
+    margin-right: auto;
+    margin-left: auto;
+}
+th{
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+tr{
+    background-color:#d4e3e5;
+}
+td{
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+
+
+
+#Content {
+    margin: 0;
+    padding: 0ex 0ex 0ex 0ex;
+    width: 99%;
+    /*color: #333;*/
+    color: #FCDD44;
+    background-color: #FFF;
+    border-width: 0;
+}
+
+
+
+#Catalog {
+    padding: 1ex;
+    background:inherit;
+    text-align:center;
+}
+#Catalog input[type="submit"]{
+    padding: .3ex !important;
+    background: rgba(252, 221, 68, 0.39) none repeat scroll 0% 0%;
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif !important;
+    font-size: 1.5ex !important;
+    border: 1px solid #D2B731;
+    color: #FFF;
+}
+#Catalog input[type=text],textarea{border-radius:5px;border:1px solid rgba(252, 221, 68, 0.39);}
+#Catalog input[type="submit"],textarea{border-radius:3px;border:1px rgba(252, 221, 68, 0.39)}
+#Catalog input[type="password"],textarea{border-radius:3px;border:1px solid rgba(252, 221, 68, 0.39)}
+/*
+#Catalog input[type="submit"]:hover {
+    color: #000 !important;
+    background-color: #54c07a !important;
+    cursor:pointer !important;
+}*/
+
+
+#Catalog input[type="submit"]:hover {
+    background: rgba(252, 221, 68, 1);
+    color: #000;
+}
+
+#Catalog table{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#BackLink{
+    padding: 1ex;
+    float: right;
+    border-width: .1ex 0ex .1ex 0px;
+    border-style: solid;
+    border-color: #FCDD44;
+}
+
+#Cart{
+    width: 47%;
+    float: left;
+    background-color:#ddd;
+}
+a{
+    color: #fcd321;
+}
+
+#container{
+    background: rgba(100, 160, 44, 0.12);
+    width: 550px; height: 400px;
+    width: 550px;
+    height: 400px;
+    position: absolute;
+    top: 100px;
+}
+
+

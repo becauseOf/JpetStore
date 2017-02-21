@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean class="dao.HibernateDAO" id="hibernateDAO">
+
+    </bean>
+
+    <!--<bean class="dao.HibernateUtil" id="hibernateUtil" factory-method="buildSessionFactory">
+
+    </bean>-->
+
+    <bean class="action.pets.PetsCatalogAction" id="petsCatalogAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.pets.PetsItemAction" id="petsItemAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.LogAction" id="logAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.LoginAction" id="loginAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.OrderAction" id="orderAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.RegisterAction" id="registerAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.SearchAction" id="searchAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+    <bean class="action.user.ShoppingCartAction" id="shoppingCartAction">
+        <property name="hibernateDAO" ref="hibernateDAO"/>
+    </bean>
+
+    <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />-->
+
+    <!-- 导入外部的properties文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driverClass}" />
+        <property name="url" value="${jdbcUrl}"></property>
+        <property name="username" value="${user}" />
+        <property name="password" value="${password}" />
+        <!-- 数据库连接池保持的最小连接数 -->
+        <property name="minIdle" value="5" />
+        <!-- 数据库连接池保持的最大连接数 -->
+        <property name="maxIdle" value="30000" />
+        <!--
+            当数据库连接因为某种原因断掉之后，再重新从连接池中拿另外一个连接时实际上这个连接可能
+            已经无效，所以为了确保所拿到的连接全都有效需要在获取连接，返回连接以及连接空闲时进行
+            有效性验证 下面3个设置为ture时进行验证，默认为false
+         -->
+        <!-- 取得连接时是否进行有效性验证 -->
+        <property name="testOnBorrow" value="true" />
+        <!-- 返回连接时是否进行有效性验证 -->
+        <property name="testOnReturn" value="true" />
+        <!-- 连接空闲时是否进行有效性验证 -->
+        <property name="testWhileIdle" value="true" />
+
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="datasource" />
+        <property name="hibernateProperties">
+            <props>
+                <!-- 设置Hibernate方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!-- 是否打印sql -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 格式化sql -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!-- 是否自动更新表 -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <!-- 最大抓取深度，如果为0，则关闭默认的外连接抓取。建议值为0-3 -->
+                <prop key="hibernate.max_fetch_depth">1</prop>
+                <!-- 用于生成有助于调试的注释信息，默认为关闭 -->
+                <prop key="hibernate.use_sql_comments">true</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>bean/user/Login.hbm.xml</value><!--
+                <value>bean/user/Register.java</value>
+                <value>bean/user/Log.java</value>
+                <value>bean/user/Order.java</value>
+                <value>bean/pets/Entity.java</value>
+                <value>  bean/pets/ShoppingCart.java</value>-->
+            </list>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>bean.user.Register</value>
+                <value>bean.user.Log</value>
+                <value>bean.user.Order</value>
+                <value>bean.pets.Entity</value>
+                <value>bean.pets.ShoppingCart</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+</beans>

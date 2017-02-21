@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+    <field name="register.first_name">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>*必填字段</message>
+        </field-validator>
+    </field>
+    <field name="register.last_name">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>*必填字段</message>
+        </field-validator>
+    </field>
+    <field name="register.email">
+        <field-validator type="email">
+            <message>邮箱格式不正确</message>
+        </field-validator>
+    </field>
+    <field name="register.phone">
+        <field-validator type="regex">
+            <param name="regexExpression">
+                [1-9]\d{10}(?!\d)
+            </param>
+            <message>电话号码格式不正确</message>
+        </field-validator>
+    </field>
+    <field name="register.zip">
+        <field-validator type="regex">
+            <param name="regexExpression">
+                [1-9]\d{5}(?!\d)
+            </param>
+            <message>邮编格式不正确</message>
+        </field-validator>
+    </field>
+</validators>

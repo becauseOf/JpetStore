@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--解决乱码    -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.custom.i18n.resources" value="message"/>
+
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.ui.templateDir" value="template"/>
+    <constant name="struts.ui.templateSuffix" value="ftl"/>
+
+
+    <package name="user" extends="struts-default,json-default">
+
+        <interceptors>
+
+            <interceptor name="SearchInterceptor" class="myinterceptor.SearchInterceptor">
+            </interceptor>
+        </interceptors>
+
+        <action name="ChangeLanguageAction" class="action.user.ChangeLanguageAction">
+            <result name="login">/WEB-INF/jsp/users/account/login.jsp</result>
+            <result name="register">/WEB-INF/jsp/users/account/register.jsp</result>
+        </action>
+        <action name="AccountInfoAction" class="action.user.AccountInfoAction">
+            <result name="MyInfo">/WEB-INF/jsp/users/account/MyInfo.jsp</result>
+        </action>
+        <action name="EditOrderAction" class="action.user.EditOrderAction">
+            <result name="OrderForm">/WEB-INF/jsp/users/buy/OrderForm.jsp</result>
+        </action>
+        <action name="LoginAction" class="action.user.LoginAction">
+            <result name="success" type="redirect">/index.jsp</result>
+            <result name="login">/WEB-INF/jsp/users/account/login.jsp</result>
+            <result name="LoginOut">/WEB-INF/jsp/users/account/LoginOut.jsp</result>
+            <interceptor-ref name="modelDriven"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="OrderAction" class="action.user.OrderAction">
+            <result name="OrderShipingAddress">/WEB-INF/jsp/users/buy/OrderShipingAddress.jsp</result>
+            <result name="OrderFormOk">/WEB-INF/jsp/users/buy/OrderFormOk.jsp</result>
+            <result name="OrderFormFinal">/WEB-INF/jsp/users/buy/OrderFormFinal.jsp</result>
+            <result name="ShowOrder">/WEB-INF/jsp/users/buy/ShowOrder.jsp</result>
+        </action>
+
+        <action name="SecurityCodeImageAction" class="action.user.SecurityCodeImageAction">
+            <result  type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">imageStream</param>
+                <param name="bufferSize">2048</param>
+            </result>
+        </action>
+
+        <action name="RegisterUserAction" class="action.user.RegisterUserAction">
+            <result name="success" type="redirect">/index.jsp</result>
+            <result name="register">/WEB-INF/jsp/users/account/register.jsp</result>
+        </action>
+
+        <action name="RegisterAction" class="action.user.RegisterAction">
+            <result name="success" type="redirect">/index.jsp</result>
+            <result name="register">/WEB-INF/jsp/users/account/register.jsp</result>
+            <result name="input">/WEB-INF/jsp/users/account/register.jsp</result>
+
+            <interceptor-ref name="modelDriven"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="SearchAction" class="action.user.SearchAction">
+            <result name="Search">/WEB-INF/jsp/users/Search.jsp</result>
+            <result type="json">
+                <param name="root">result</param>
+            </result>
+
+            <interceptor-ref name="SearchInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="ShoppingCartAction" class="action.user.ShoppingCartAction">
+            <result name="login">/WEB-INF/jsp/users/account/login.jsp</result>
+            <result name="AddCart">/WEB-INF/jsp/users/buy/AddCart.jsp</result>
+        </action>
+        <action name="LogAction" class="action.user.LogAction">
+            <result name="log">/WEB-INF/jsp/users/account/log.jsp</result>
+        </action>
+    </package>
+
+    <package name="pets" extends="struts-default,json-default">
+
+        <interceptors>
+            <interceptor name="PetsInterceptor" class="myinterceptor.PetsInterceptor">
+                <!--<param name="name">a</param>-->
+                <!--需要在类中实现该参数的set get方法-->
+            </interceptor>
+            <interceptor name="ProductInterceptor" class="myinterceptor.ProductInterceptor">
+            </interceptor>
+        </interceptors>
+
+        <action name="PetsCatalogAction" class="action.pets.PetsCatalogAction">
+            <result name="PetsCatalog">/WEB-INF/jsp/pets/PetsCatalog.jsp</result>
+            <result type="json">
+                <param name="root">result</param>
+            </result>
+
+            <interceptor-ref name="ProductInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="PetsInfoAction" class="action.pets.PetsInfoAction">
+            <result name="PetsInfo">/WEB-INF/jsp/pets/PetsInfo.jsp</result>
+
+        </action>
+        <action name="PetsItemAction" class="action.pets.PetsItemAction">
+            <result name="PetsItem">/WEB-INF/jsp/pets/PetsItem.jsp</result>
+
+            <interceptor-ref name="PetsInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+    </package>
+</struts>
